@@ -17,10 +17,10 @@ but.addEventListener("click", () => {
     }).catch((error) => {
         console.log(error);
     })
-    
-    document.getElementById("name").value="";
-    document.getElementById("mail").value="";
-    document.getElementById("num").value="";
+
+    document.getElementById("name").value = "";
+    document.getElementById("mail").value = "";
+    document.getElementById("num").value = "";
 })
 window.addEventListener("DOMContentLoaded", () => {
     axios.get("https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData")
@@ -32,11 +32,14 @@ window.addEventListener("DOMContentLoaded", () => {
                 del.innerText = "delete";
                 var edit = document.createElement("button");
                 edit.innerText = "edit";
-                lis.innerHTML = res.data[i].mail + " " + res.data[i].name + " " + res.data[i].phone;
+                lis.innerHTML = res.data[i].mail + " " + res.data[i].name + " " + res.data[i].phone + " ";
                 lis.appendChild(del);
                 lis.appendChild(edit);
                 list.appendChild(lis);
+                //deleteHandler
                 del.addEventListener("click", createDeleteHandler(res.data[i]._id, lis));
+                //editHandler
+                edit.addEventListener("click", update(res.data[i]._id, lis));
             }
         })
         .catch((err) => {
@@ -58,4 +61,16 @@ function createDeleteHandler(itemId, listItem) {
                 console.log("Error deleting element from the server:", deleteErr);
             });
     };
+}
+
+function update(Id, itm) {
+    return function (e) {
+        console.log(Id);
+        console.log(itm.innerText);
+        document.getElementById("name").value = itm.innerText.split(" ")[0];
+        document.getElementById("mail").value = itm.innerText.split(" ")[1];
+        document.getElementById("num").value = itm.innerText.split(" ")[2];
+        itm.remove();
+    }
+
 }
