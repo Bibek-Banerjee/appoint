@@ -36,7 +36,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 lis.appendChild(del);
                 lis.appendChild(edit);
                 list.appendChild(lis);
-                // del.addEventListener("click", createDeleteHandler(res.data[i]._id, lis));
+                del.addEventListener("click", createDeleteHandler(res.data[i]._id, lis));
             }
         })
         .catch((err) => {
@@ -44,18 +44,18 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 });
 
-// function createDeleteHandler(itemId, listItem) {
-//     return function (e) {
-//         // Remove the targeted <li> from the DOM
-//         listItem.remove();
+function createDeleteHandler(itemId, listItem) {
+    return function (e) {
+        // Remove the targeted <li> from the DOM
+        listItem.remove();
 
-//         // Make a DELETE request to the server to remove the corresponding data
-//         axios.delete(`https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData/${itemId}`)
-//             .then((deleteRes) => {
-//                 console.log("Element deleted from the server:", deleteRes);
-//             })
-//             .catch((deleteErr) => {
-//                 console.log("Error deleting element from the server:", deleteErr);
-//             });
-//     };
-// }
+        // Make a DELETE request to the server to remove the corresponding data
+        axios.delete(`https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData/${itemId}`)
+            .then((deleteRes) => {
+                console.log("Element deleted from the server:", deleteRes);
+            })
+            .catch((deleteErr) => {
+                console.log("Error deleting element from the server:", deleteErr);
+            });
+    };
+}
