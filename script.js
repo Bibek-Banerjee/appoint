@@ -8,7 +8,7 @@ but.addEventListener("click", () => {
     var li = document.createElement("li");
     li.innerHTML = n + " " + m + " " + nu + `<button class="buton">Delete</button>` + `<button>Edit</button>`;
     list.appendChild(li);
-    axios.post("https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData", {
+    axios.post("https://crudcrud.com/api/71a1daa0c3694b048a00d5e0592bfd4b/appointmentData", {
         name: n,
         mail: m,
         phone: nu
@@ -23,7 +23,7 @@ but.addEventListener("click", () => {
     document.getElementById("num").value = "";
 })
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData")
+    axios.get("https://crudcrud.com/api/71a1daa0c3694b048a00d5e0592bfd4b/appointmentData")
         .then((res) => {
             console.log(res);
             for (var i = 0; i < res.data.length; i++) {
@@ -53,7 +53,7 @@ function createDeleteHandler(itemId, listItem) {
         listItem.remove();
 
         // Make a DELETE request to the server to remove the corresponding data
-        axios.delete(`https://crudcrud.com/api/eef04a9dfffd40f6af4af98b43c3c21e/AppData/${itemId}`)
+        axios.delete(`https://crudcrud.com/api/71a1daa0c3694b048a00d5e0592bfd4b/${itemId}`)
             .then((deleteRes) => {
                 console.log("Element deleted from the server:", deleteRes);
             })
@@ -71,6 +71,15 @@ function update(Id, itm) {
         document.getElementById("mail").value = itm.innerText.split(" ")[1];
         document.getElementById("num").value = itm.innerText.split(" ")[2];
         itm.remove();
+
+        // Make a DELETE request to the server to remove the corresponding data
+        axios.delete(`https://crudcrud.com/api/71a1daa0c3694b048a00d5e0592bfd4b/appointmentData/${Id}`)
+            .then((deleteRes) => {
+                console.log("Element deleted from the server:", deleteRes);
+            })
+            .catch((deleteErr) => {
+                console.log("Error deleting element from the server:", deleteErr);
+            })
+    };
     }
 
-}
